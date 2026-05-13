@@ -197,13 +197,16 @@ h1 {
     margin-bottom: 10px; 
 }
 
-footer { 
-    text-align: center; 
-    padding: 2rem; 
-    color: var(--text-muted); 
-    font-size: 0.8rem; 
-    border-top: 1px solid rgba(197, 160, 89, 0.1); 
-}
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(197, 160, 89, 0.1);
+    margin-top: auto; /* Pushes it to the bottom of the main content if it's short */
+    clear: both;
+    }
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) { 
@@ -822,9 +825,14 @@ footer {
         </section>
     </main>
 
+    <main class="main-content">
+    <section id="comments" class="content-section">
+        </section>
+
     <footer>
         <p>&copy; 2026 BALIW NA AKO | Created by the team..</p>
     </footer>
+    </main>
 
     <script>
         // ===================== DATA DEFINITIONS =====================
