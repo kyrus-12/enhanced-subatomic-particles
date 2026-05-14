@@ -153,9 +153,6 @@
             scroll-margin-top: 80px;  
         }
 
-        .content-section.active {
-            display: block;
-        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -1127,16 +1124,13 @@
 
         // ===================== NAVIGATION =====================
         
-    
-  function scrollToSection(sectionId) {
-    // Highlight clicked nav item
+    function scrollToSection(sectionId) {
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     event.currentTarget.classList.add('active');
     
-    // Scroll to section with header offset
     const section = document.getElementById(sectionId);
     if (section) {
-        const headerOffset = 80;  // 70px header + 10px padding
+        const headerOffset = 80;
         const targetPosition = section.offsetTop - headerOffset;
         
         window.scrollTo({
@@ -1145,12 +1139,11 @@
         });
     }
 }
-    
-    function initScrollSpy() {
+
+function initScrollSpy() {
     const sections = document.querySelectorAll('section[id]');
     const navItems = document.querySelectorAll('.nav-item');
     
-    // Map nav items to their section IDs for faster lookup
     const navMap = {};
     navItems.forEach(item => {
         const match = item.getAttribute('onclick').match(/scrollToSection\('([^']+)'\)/);
@@ -1159,33 +1152,30 @@
     
     window.addEventListener('scroll', () => {
         let current = '';
-        const scrollPos = window.scrollY + 100; // Offset for header
+        const scrollPos = window.scrollY + 100;
         
-        // Find which section is currently in view
         for (let i = 0; i < sections.length; i++) {
             const section = sections[i];
             const sectionTop = section.offsetTop;
             const sectionBottom = sectionTop + section.offsetHeight;
             
-            // Check if scroll position is within this section
             if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
                 current = section.getAttribute('id');
             }
         }
         
-        // If scrolled to very bottom, highlight last section
         const nearBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
         if (nearBottom && !current && sections.length > 0) {
             current = sections[sections.length - 1].getAttribute('id');
         }
         
-        // Update nav highlighting
         navItems.forEach(item => item.classList.remove('active'));
         if (current && navMap[current]) {
             navMap[current].classList.add('active');
         }
     });
 }
+  
     
     function disableDoubleClickZoom() {
     // Disable double-click zoom
