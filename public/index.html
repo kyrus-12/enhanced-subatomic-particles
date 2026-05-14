@@ -1126,12 +1126,7 @@
         }
 
         // ===================== NAVIGATION =====================
-        function switchTab(tabId) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-        }
+        
     
   function scrollToSection(sectionId) {
     // Highlight clicked nav item
