@@ -6,253 +6,262 @@
     <title>Subatomic Particles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        
-:root {
-    --bg: #1a0a0a;
-    --surface: rgba(40, 20, 20, 0.8);
-    --text: #f5e6e6;
-    --text-muted: #d0b0b0;
-    --accent-1: #800000;
-    --accent-2: #d2691e;
-    --gold: #c5a059;
-    --bg-image: url('https://i.imgur.com/ytubBUf.jpg');  
-}
+        :root {
+            --bg: #1a0510;;
+            --surface: rgba(60, 15, 40, 0.85);  
+            --text: #fce4ec;
+            --text-muted:  #d8a0b0;
+            --accent-1: #880e4f;
+            --accent-2: #e91e63;
+            --gold: #ff80ab;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: row;
-    font-size: 1rem; /* Base size - don't compound */
-}
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 1.3rem;
+        }
 
-.bg-gradient {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(128, 0, 0, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(210, 105, 30, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(197, 160, 89, 0.1) 0%, transparent 40%);
-    animation: pulse 8s ease-in-out infinite;
-    z-index: -1;
-}
+        /* ===== BACKGROUND ===== */
+        .bg-layer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background: var(--bg);
+            background-image: url('https://i.imgur.com/bxeX7V6.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .bg-layer::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(26, 10, 10, 0.6);
+        }
 
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 70px;
+            background: rgba(20, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 1000;
+        }
 
-.header {
-    position: fixed; top: 0; left: 0; right: 0; height: 70px;
-    background: rgba(20, 10, 10, 0.9); backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-    display: flex; align-items: center; padding: 0 2rem; z-index: 1000;
-}
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-1), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.hamburger {
-    width: 30px; height: 24px; display: flex; flex-direction: column;
-    justify-content: space-between; cursor: pointer; z-index: 1001;
-}
+        /* ===== SIDEBAR - FIXED LEFT ===== */
+        .sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 260px;
+            height: calc(100vh - 70px);
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(197, 160, 89, 0.2);
+            z-index: 999;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
 
-.hamburger span {
-    display: block; width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--accent-1), var(--gold));
-    border-radius: 2px; transition: all 0.3s ease;
-}
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1.5rem;
+        }
 
-.hamburger.open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+        .nav-item {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.3rem;
+        }
 
-.brand {
-    margin-left: 1.5rem; font-size: 1.5rem; font-weight: 700;
-    background: linear-gradient(135deg, var(--accent-1), var(--gold));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
+        .nav-item:hover {
+            background: rgba(128, 0, 0, 0.2);
+            transform: translateX(10px);
+        }
 
-/* ===== SIDEBAR ===== */
-.sidebar {
-    position: fixed; top: 70px; left: 0; width: 260px;
-    height: calc(100vh - 70px); background: var(--surface);
-    backdrop-filter: blur(20px); border-right: 1px solid rgba(197, 160, 89, 0.2);
-    transition: transform 0.4s ease, width 0.4s ease; 
-    z-index: 999;
-    overflow-y: auto; padding: 2rem 0;
-}
+        .nav-item.active {
+            background: rgba(128, 0, 0, 0.3);
+            border-left: 4px solid var(--gold);
+        }
 
-/* Collapsed state for desktop */
-.sidebar.closed {
-    transform: translateX(-100%);
-}
-
-.nav-menu { display: flex; flex-direction: column; gap: 0.5rem; padding: 0 1.5rem; }
-
-.nav-item {
-    padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer;
-    transition: all 0.3s ease; position: relative;
-}
-
-.nav-item:hover { background: rgba(128, 0, 0, 0.2); transform: translateX(10px); }
-
-.nav-item.active { background: rgba(128, 0, 0, 0.3); border-left: 4px solid var(--gold); }
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-    margin-top: 70px; 
-    margin-left: 260px; 
-    flex: 1; 
-    padding: 2rem; 
-    transition: margin-left 0.4s ease; 
-    font-size: 1.3rem; 
-    width: auto/* Explicit width */
-    min-height: calc(100vh - 70px);
-}
-
-/* When sidebar is closed */
-.sidebar.closed ~ .main-content {
-    margin-left: 0;
-    width: 100%;
-}
-
-.content-section {
-    display: none; 
-    animation: fadeIn 0.5s ease; 
-    max-width: 100%; /* Use full available width */
-    margin: 0 auto; 
-}
-
-.content-section.active { display: block; }
-
-@keyframes fadeIn { 
-    from { opacity: 0; transform: translateY(20px); } 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-.intro-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(197, 160, 89, 0.2);
-    border-radius: 24px; padding: 3rem;
-}
-
-h1 { 
-    background: linear-gradient(135deg, var(--gold), #ffffff); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    margin-bottom: 1.5rem; 
-}
-
-.social-container { 
-    display: flex; 
-    gap: 20px; 
-    justify-content: center; 
-    margin-top: 25px; 
-}
-
-.social-btn {
-    background: rgba(197, 160, 89, 0.1); 
-    color: var(--gold);
-    width: 50px; height: 50px; 
-    display: flex; align-items: center;
-    justify-content: center; 
-    border-radius: 50%; 
-    text-decoration: none;
-    border: 1px solid var(--gold); 
-    transition: all 0.3s ease; 
-    font-size: 1.5rem;
-}
-
-.social-btn:hover { 
-    background: var(--gold); 
-    color: var(--bg); 
-    transform: translateY(-5px) scale(1.1); 
-}
-
-.media-container { 
-    margin: 20px 0; 
-    padding: 15px; 
-    background: rgba(0,0,0,0.2); 
-    border-radius: 12px; 
-    border: 1px dashed var(--gold); 
-}
-
-.video-wrapper { 
-    position: relative; 
-    padding-bottom: 56.25%; 
-    height: 0; 
-    overflow: hidden; 
-}
-
-.video-wrapper iframe { 
-    position: absolute; 
-    top: 0; left: 0; 
-    width: 100%; height: 100%; 
-    border-radius: 8px; 
-}
-
-.img-fluid { 
-    width: 100%; 
-    height: auto; 
-    border-radius: 8px; 
-    margin-bottom: 10px; 
-}
-
-footer {
-    width: 100%;
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    border-top: 1px solid rgba(197, 160, 89, 0.1);
-    margin-top: auto; /* Pushes it to the bottom of the main content if it's short */
-    clear: both;
-    }
-
-/* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 768px) { 
-    .sidebar {
-        width: 260px;
-        transform: translateX(-100%); /* Hidden by default on mobile */
-    }
+        /* ===== MAIN CONTENT - FILLS REMAINING SPACE ===== */
+        .main-content {
+            margin-top: 70px;
+            margin-left: 260px;
+            min-height: calc(100vh - 70px);
+            padding: 2rem;
+            font-size: 1.3rem;
+            width: calc(100% - 260px);
+            display: flex;
+            flex-direction: column;
+        }
     
-    .sidebar.open {
-        transform: translateX(0);
-    }
-    
-    .sidebar .nav-text {
-        display: inline; /* Show text on mobile overlay */
-    }
-
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-        padding: 1rem;
-    }
-    
-    .brand {
-        margin-left: 0;
-        font-size: 1.2rem;
-    }
+    .main-content::after {
+    content: '';
+    display: block;
+    height: 70vh;  /* Extra space at bottom so last section can scroll up */
 }
 
-/* Styling for Embeds and Quizzes */
-.embed-container {
-    margin: 20px 0;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 12px;
-    border: 1px solid var(--gold);
+    
+    .main-content > section.active {
+    flex: 1;
 }
 
-.embed-container iframe {
-    width: 100%;
-    height: 600px;
-    border: none;
+    html {
+    scroll-padding-top: 80px;  /* Slightly more than header height (70px) */
+    scroll-behavior: smooth;    /* Smooth scrolling */
+        touch-action: manipulation;
 }
     
     
     
-    
+        .content-section {
+            display: block;
+            animation: fadeIn 0.5s ease;
+            width: 100%;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            min-height: 10vh;
+            scroll-margin-top: 80px;  
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            width: 100%;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, var(--gold), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== MEDIA ===== */
+        .media-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px dashed var(--gold);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 8px;
+        }
+
+        .img-fluid {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* ===== EMBEDS ===== */
+        .embed-container {
+            margin: 20px 0;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--gold);
+        }
+
+        .embed-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+
+        /* ===== SOCIAL ===== */
+        .social-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .social-btn {
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold);
+            width: 50px; height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .social-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            margin-top: 2rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== QUIZ STYLES ===== */
         .quiz-container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -322,7 +331,7 @@ footer {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #score-summary {
+        #score-summary, #matching-score-summary {
             display: none;
             text-align: center;
             padding: 20px;
@@ -332,7 +341,6 @@ footer {
             margin-bottom: 20px;
         }
 
-        /* ===== BUTTON CONTAINER FOR SIDE-BY-SIDE ===== */
         .button-group {
             display: flex;
             gap: 15px;
@@ -383,16 +391,7 @@ footer {
             box-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
         }
 
-        @media (max-width: 768px) {
-            .button-group {
-                flex-direction: column;
-            }
-            .btn-submit, .btn-reset {
-                width: 100%;
-            }
-        }
-
-        /* ===== MATCHING TYPE STYLES ===== */
+        /* ===== MATCHING ===== */
         .matching-container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -413,10 +412,6 @@ footer {
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .matching-grid { grid-template-columns: 1fr; gap: 15px; }
         }
 
         .matching-column {
@@ -546,27 +541,6 @@ footer {
             color: var(--gold);
         }
 
-        #matching-score-summary {
-            display: none;
-            text-align: center;
-            padding: 25px;
-            background: linear-gradient(135deg, var(--accent-1), var(--gold));
-            color: white;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            animation: slideIn 0.5s ease;
-        }
-
-        #matching-score-summary h2 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        #matching-score-summary p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
         .matching-progress {
             display: flex;
             align-items: center;
@@ -590,77 +564,82 @@ footer {
             border-radius: 3px;
             transition: width 0.4s ease;
         }
-    
-    /* Background layer - handles both image and color */
-.bg-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    /* Default: solid color background */
-    background: var(--bg);
-}
 
-/* When an image is provided */
-.bg-layer.has-image {
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 70px;
+                border-right: none;
+                border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+                padding: 1rem 0;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 0 1rem;
+                gap: 0.3rem;
+            }
+
+            .nav-item {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+                flex: 1;
+                min-width: 140px;
+                text-align: center;
+            }
+
+            .nav-item:hover {
+                transform: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .matching-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn-submit, .btn-reset {
+                width: 100%;
+            }
+        }
+    
+    .bg-layer.has-image {
     background-image: var(--bg-image);
-    background-size: cover;           /* Fills entire screen */
-    background-position: center;      /* Centers the image */
-    background-repeat: no-repeat;     /* No tiling */
-    background-attachment: fixed;     /* Stays fixed on scroll */
-}
-
-/* Optional: Add a dark overlay so text stays readable over bright images */
-.bg-layer.has-image::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(26, 10, 10, 0.6); /* Dark semi-transparent overlay */
-    pointer-events: none;
-}
-
-/* Keep your animated pulse effect, but only when NO image */
-.bg-layer:not(.has-image) {
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(128, 0, 0, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(210, 105, 30, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(197, 160, 89, 0.1) 0%, transparent 40%);
-    animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse { 
-    0%, 100% { opacity: 1; } 
-    50% { opacity: 0.7; } 
-}
-    
-
+    background-size: cover;
+  }
     </style>
 </head>
 <body>
-    <!-- In your HTML body, right after <body> tag -->
-<div class="bg-layer" id="bgLayer"></div>
-    
+    <div class="bg-layer"></div>
+
     <header class="header">
-        <div class="hamburger" onclick="toggleMenu()">
-        </div>
-        <div class="brand">Portals</div>
+        <div class="brand">AH-TEAM Blogspot</div>
     </header>
 
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar">
         <nav class="nav-menu">
-            <div class="nav-item active" onclick="switchTab('home')"><span class="nav-text">Home</span></div>
-            <div class="nav-item" onclick="switchTab('misconceptions')"><span class="nav-text">Misconceptions</span></div>
-            <div class="nav-item" onclick="switchTab('discussion')"><span class="nav-text">Content Discussion</span></div>
-            <div class="nav-item" onclick="switchTab('home-activities')"><span class="nav-text">Home Activities</span></div>
-            <div class="nav-item" onclick="switchTab('other-activities')"><span class="nav-text">Other Learning Activities</span></div>
-            <div class="nav-item" onclick="switchTab('evaluation')"><span class="nav-text">Evaluation</span></div>
-            <div class="nav-item" onclick="switchTab('authors')"><span class="nav-text">About the Authors</span></div>
-            <div class="nav-item" onclick="switchTab('comments')"><span class="nav-text">Comments</span></div>
+            <div class="nav-item active" onclick="scrollToSection('home')">Home</div>
+            <div class="nav-item" onclick="scrollToSection('misconceptions')">Misconceptions</div>
+            <div class="nav-item" onclick="scrollToSection('discussion')">Content Discussion</div>
+            <div class="nav-item" onclick="scrollToSection('home-activities')">Home Activities</div>
+            <div class="nav-item" onclick="scrollToSection('other-activities')">Other Learning Activities</div>
+            <div class="nav-item" onclick="scrollToSection('evaluation')">Evaluation</div>
+            <div class="nav-item" onclick="scrollToSection('authors')">About the Authors</div>
+            <div class="nav-item" onclick="scrollToSection('comments')">Comments</div>
         </nav>
     </aside>
 
@@ -678,10 +657,10 @@ footer {
         <section id="misconceptions" class="content-section">
             <div class="intro-card">
                 <h1>Misconceptions</h1>
-                Itama ang maling akala nak!
+                <p>Itama ang maling akala nak!</p>
                 <div class="media-container">
                     <div class="video-wrapper">
-                        <iframe width="800" height="315" src="https://www.youtube.com/embed/lk5Tg6RB5ew" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/lk5Tg6RB5ew" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -691,21 +670,18 @@ footer {
             <div class="intro-card">
                 <h1>Content Discussion</h1>
                 <p>Mag-aral ka na nak!</p>
-                
                 <br><br>
                 <div class="media-container">
-                <div class="video-wrapper">
-                    <iframe width="800" height="315" src="https://www.youtube.com/embed/QK0kBwNs5QM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/QK0kBwNs5QM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
                 </div>
-                </div>
-                
                 <br><br>
                 <div class="media-container">
-                <div class="video-wrapper">
-                    <iframe width="800" height="315" src="https://www.youtube.com/embed/6jP7WcO-b4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/6jP7WcO-b4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
                 </div>
-                </div>
-                               
             </div>
         </section>
 
@@ -720,15 +696,10 @@ footer {
             <div class="intro-card">
                 <h1>Other Learning Activities</h1>
                 <p>Haist.</p>
-                
-                <div class="embed-container" >
-            <iframe src="https://extended-activity.onrender.com/" style="height: 950px;"
-                allow="autoplay; fullscreen; encrypted-media" 
-                allowfullscreen >
-        </iframe>
+                <div class="embed-container">
+                    <iframe src="https://extended-activity.onrender.com/" style="height: 950px;" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>
                 </div>
                 <p><a href="https://extended-activity.onrender.com/" target="_blank" style="color: var(--gold);">Open Simulation in New Tab</a></p>
-
             </div>
         </section>
 
@@ -737,58 +708,44 @@ footer {
                 <h1>Evaluation</h1>
                 <p style="margin-bottom: 30px;">Test your knowledge of subatomic particles.</p>
 
-                <!-- ===== MATCHING TYPE SECTION ===== -->
                 <h1>Part 1: Matching Type</h1>
-
-                <!-- Matching Score Summary -->
                 <div id="matching-score-summary">
                     <h2 id="matching-final-score-text">You scored 0/0!</h2>
                     <p id="matching-final-message">Great job matching all pairs!</p>
                 </div>
-
-                <!-- Matching containers will be injected by JS -->
                 <div id="matching-section"></div>
-            
-                <br><br>
-                
-                <h1>Part 2: Multiple Choice Tests</h1>
 
-                <!-- MCQ Score Summary -->
+                <br><br>
+                <h1>Part 2: Multiple Choice Tests</h1>
                 <div id="score-summary">
                     <h2 id="final-score-text">You scored 0/0!</h2>
                     <p>Check the feedback below for explanations.</p>
                 </div>
-
-                <!-- MCQ containers will be injected by JS -->
                 <div id="mcq-section"></div>
 
-                <!-- Side-by-side buttons -->
                 <div class="button-group">
                     <button class="btn-submit" onclick="submitQuiz()">Submit Answers</button>
                     <button class="btn-reset" onclick="resetAll()">
                         <i class="fas fa-redo"></i> Reset All Tests
                     </button>
                 </div>
-                
+
                 <br><br>
                 <h1>Part 3: Drawing</h1>
-
                 <div class="embed-container">
-            <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" allowfullscreen></iframe>
-              </div>
-               <p><a href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" target="_blank" style="color: var(--gold);">Open Simulation in New Tab</a></p>
-    
+                    <iframe src="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" allowfullscreen></iframe>
+                </div>
+                <p><a href="https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_all.html" target="_blank" style="color: var(--gold);">Open Simulation in New Tab</a></p>
+
                 <br><br>
                 <h1>Part 4: Essay</h1>
-        <div class="embed-container">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeXATY9nwEvbxwPwlH2MRTaT2OjwMGbOjVvaC3r8JcaJqVb-Q/viewform?embedded=true">Loading…</iframe>
-        </div>
-                <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeXATY9nwEvbxwPwlH2MRTaT2OjwMGbOjVvaC3r8JcaJqVb-Q/viewform" target="_blank" style="color: var(--gold);">Open Form in New Tab (if not loading properly) </a></p>
+                <div class="embed-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeXATY9nwEvbxwPwlH2MRTaT2OjwMGbOjVvaC3r8JcaJqVb-Q/viewform?embedded=true">Loading...</iframe>
+                </div>
+                <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSeXATY9nwEvbxwPwlH2MRTaT2OjwMGbOjVvaC3r8JcaJqVb-Q/viewform" target="_blank" style="color: var(--gold);">Open Form in New Tab (if not loading properly)</a></p>
 
-        <hr style="border: 0; border-top: 1px solid var(--gold); margin: 40px 0;">
-
-
-            </div>          
+                <hr style="border: 0; border-top: 1px solid var(--gold); margin: 40px 0;">
+            </div>
         </section>
 
         <section id="authors" class="content-section">
@@ -807,37 +764,30 @@ footer {
             <div class="intro-card">
                 <h1>Comments</h1>
                 <script src="https://giscus.app/client.js"
-        data-repo="kyrus-12/subatomic_particles"
-        data-repo-id="R_kgDOSIrU1g"
-        data-category="General"
-        data-category-id="DIC_kwDOSIrU1s4C7ZGh"
-        data-mapping="url"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="dark_high_contrast"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-</script>
+                    data-repo="kyrus-12/subatomic_particles"
+                    data-repo-id="R_kgDOSIrU1g"
+                    data-category="General"
+                    data-category-id="DIC_kwDOSIrU1s4C7ZGh"
+                    data-mapping="url"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="dark_high_contrast"
+                    data-lang="en"
+                    crossorigin="anonymous"
+                    async>
+                </script>
             </div>
         </section>
-    </main>
 
-    <main class="main-content">
-    <section id="comments" class="content-section">
-        </section>
-
-    <footer>
-        <p>&copy; 2026 BALIW NA AKO | Created by the team..</p>
-    </footer>
+        <footer>
+            <p>&copy; 2026 BALIW NA AKO | Created by the team..</p>
+        </footer>
     </main>
 
     <script>
-        // ===================== DATA DEFINITIONS =====================
-        
-        // Matching questions data
+        // ===================== DATA =====================
         const matchingData = [
             {
                 id: 1,
@@ -851,7 +801,6 @@ footer {
             },
         ];
 
-        // MCQ questions data
         const mcqData = [
             {
                 id: 1,
@@ -895,7 +844,6 @@ footer {
             }
         ];
 
-        // Clues for wrong matches
         const matchingClues = {
             'proton': 'Think about the charge: protons are found in the nucleus and carry a positive charge.',
             'neutron': 'Neutrons have no electrical charge — they are neutral.',
@@ -907,8 +855,7 @@ footer {
             'center': 'This describes the nucleus.',
         };
 
-        // ===================== UTILITY FUNCTIONS =====================
-
+        // ===================== UTILITIES =====================
         function shuffleArray(array) {
             const arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -918,8 +865,7 @@ footer {
             return arr;
         }
 
-        // ===================== RENDER FUNCTIONS =====================
-
+        // ===================== RENDER =====================
         function renderMatching() {
             const container = document.getElementById('matching-section');
             container.innerHTML = '';
@@ -971,19 +917,17 @@ footer {
         function renderMCQ() {
             const container = document.getElementById('mcq-section');
             container.innerHTML = '';
-
             const shuffledQuestions = shuffleArray(mcqData);
 
             shuffledQuestions.forEach((q, idx) => {
                 const qNum = idx + 1;
-                const displayNum = idx + 1;
                 const shuffledOptions = shuffleArray(q.options);
 
                 let optionsHtml = '';
                 shuffledOptions.forEach(opt => {
                     optionsHtml += `
                         <label class="option" id="q${qNum}-${opt.value}">
-                            <input type="radio" name="q${qNum}" value="${opt.value}" data-explain="${opt.explain}" data-correct="${opt.value === q.correct}"> 
+                            <input type="radio" name="q${qNum}" value="${opt.value}" data-explain="${opt.explain}" data-correct="${opt.value === q.correct}">
                             <span>${opt.text}</span>
                         </label>
                     `;
@@ -991,10 +935,8 @@ footer {
 
                 container.innerHTML += `
                     <div class="quiz-container" id="container-q${qNum}" data-question-id="${q.id}" data-correct="${q.correct}">
-                        <p class="question">${displayNum}. ${q.question}</p>
-                        <div class="options-list">
-                            ${optionsHtml}
-                        </div>
+                        <p class="question">${qNum}. ${q.question}</p>
+                        <div class="options-list">${optionsHtml}</div>
                         <div id="feedback-q${qNum}" class="feedback" style="display:none;">
                             <span class="status-text"></span>
                             <p class="explanation-text" style="margin-top: 8px; color: var(--text-muted);"></p>
@@ -1005,7 +947,6 @@ footer {
         }
 
         // ===================== MATCHING LOGIC =====================
-
         const matchingState = {};
 
         function initMatchingState() {
@@ -1023,9 +964,7 @@ footer {
 
         function initMatchingEvents() {
             document.querySelectorAll('.matching-container').forEach(container => {
-                const containerId = container.id;
-                const questionNum = parseInt(containerId.split('-').pop());
-                
+                const questionNum = parseInt(container.id.split('-').pop());
                 container.querySelectorAll('.matching-item').forEach(item => {
                     item.addEventListener('click', function() {
                         if (this.classList.contains('matched')) return;
@@ -1060,17 +999,15 @@ footer {
                 return;
             }
 
-            const isCorrect = firstItem.dataset.match === secondItem.dataset.id && 
+            const isCorrect = firstItem.dataset.match === secondItem.dataset.id &&
                               secondItem.dataset.match === firstItem.dataset.id;
 
             if (isCorrect) {
                 state.correctCount++;
                 state.matchedPairs++;
-                
                 const pairIndex = state.matchedPairs - 1;
                 firstItem.classList.add('matched', 'correct-match', `pair-${pairIndex % 6}`);
                 secondItem.classList.add('matched', 'correct-match', `pair-${pairIndex % 6}`);
-                
                 firstItem.classList.remove('selected');
                 state.selected = null;
 
@@ -1078,7 +1015,6 @@ footer {
                 clueText.innerHTML = `Great job! <b>${firstItem.textContent}</b> matches with <b>${secondItem.textContent}</b>.`;
                 feedbackBox.className = 'matching-feedback correct-feedback';
                 feedbackBox.style.display = 'block';
-
                 updateMatchingProgress(questionNum);
 
                 if (state.matchedPairs >= state.totalPairs) {
@@ -1087,7 +1023,6 @@ footer {
             } else {
                 firstItem.classList.add('shake', 'wrong-match');
                 secondItem.classList.add('shake', 'wrong-match');
-                
                 statusText.innerHTML = "<b>Incorrect Match!</b>";
                 const clue = matchingClues[firstItem.dataset.id] || matchingClues[secondItem.dataset.id] || 'Try again!';
                 clueText.innerHTML = `<b>Clue:</b> ${clue}`;
@@ -1107,7 +1042,6 @@ footer {
             const state = matchingState[questionNum];
             const progressBar = document.getElementById(`matching-progress-${questionNum}`);
             const countText = document.getElementById(`matching-count-${questionNum}`);
-            
             const percentage = (state.matchedPairs / state.totalPairs) * 100;
             progressBar.style.width = `${percentage}%`;
             countText.textContent = `${state.matchedPairs} / ${state.totalPairs} matched`;
@@ -1116,25 +1050,18 @@ footer {
         function showMatchingScore(questionNum) {
             const state = matchingState[questionNum];
             state.completed = true;
-            
             const summary = document.getElementById('matching-score-summary');
             const scoreText = document.getElementById('matching-final-score-text');
             const messageText = document.getElementById('matching-final-message');
-            
             summary.style.display = 'block';
             scoreText.innerHTML = `You scored ${state.correctCount} out of ${state.totalPairs}!`;
-            
-            if (state.correctCount === state.totalPairs) {
-                messageText.textContent = 'Perfect! You matched all pairs correctly!';
-            } else {
-                messageText.textContent = 'Good effort! Review the clues and try again if needed.';
-            }
-            
+            messageText.textContent = state.correctCount === state.totalPairs
+                ? 'Perfect! You matched all pairs correctly!'
+                : 'Good effort! Review the clues and try again if needed.';
             document.getElementById('evaluation').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // ===================== MCQ LOGIC =====================
-
         function submitQuiz() {
             const quizContainers = document.querySelectorAll('#mcq-section .quiz-container');
             let score = 0;
@@ -1147,15 +1074,13 @@ footer {
                 const statusText = feedbackBox.querySelector('.status-text');
                 const explanationText = feedbackBox.querySelector('.explanation-text');
                 const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
-                
+
                 container.classList.add('show-results');
-                const options = container.querySelectorAll('.option');
-                options.forEach(opt => opt.classList.remove('correct-choice', 'wrong-choice'));
+                container.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct-choice', 'wrong-choice'));
 
                 if (selected) {
                     const isCorrect = selected.value === correctAnswer;
                     const explanation = selected.getAttribute('data-explain');
-
                     if (isCorrect) {
                         score++;
                         selected.parentElement.classList.add('correct-choice');
@@ -1166,7 +1091,6 @@ footer {
                         statusText.innerHTML = "<b>Incorrect.</b>";
                         feedbackBox.className = 'feedback incorrect-feedback';
                     }
-                    
                     explanationText.innerHTML = explanation;
                     feedbackBox.style.display = "block";
                 } else {
@@ -1179,80 +1103,128 @@ footer {
             const scoreText = document.getElementById('final-score-text');
             summary.style.display = "block";
             scoreText.innerHTML = `You scored ${score} out of ${total}!`;
-            
             document.getElementById('evaluation').scrollTop = 0;
         }
 
-        // ===================== RESET ALL =====================
-
+        // ===================== RESET =====================
         function resetAll() {
-            // Reset matching state
             initMatchingState();
-
-            // Re-render matching (with new randomization)
             renderMatching();
             initMatchingEvents();
-
-            // Hide matching score summary
             document.getElementById('matching-score-summary').style.display = 'none';
-
-            // Re-render MCQ (with new randomization)
             renderMCQ();
-
-            // Hide MCQ score summary
             document.getElementById('score-summary').style.display = 'none';
-
-            // Scroll to top of evaluation
             document.getElementById('evaluation').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // ===================== NAVIGATION =====================
-
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.querySelector('.hamburger').classList.toggle('open');
-        }
-
         function switchTab(tabId) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             event.currentTarget.classList.add('active');
-            
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.classList.contains('open')) {
-                toggleMenu();
-            }
         }
-
-    function setBackground(imageUrl) {
-    const bgLayer = document.getElementById('bgLayer');
     
-    if (imageUrl && imageUrl.trim() !== '') {
-        // Image mode
-        bgLayer.style.setProperty('--bg-image', `url(${imageUrl})`);
-        bgLayer.classList.add('has-image');
-    } else {
-        // Solid color mode (default)
-        bgLayer.style.setProperty('--bg-image', '');
-        bgLayer.classList.remove('has-image');
+  function scrollToSection(sectionId) {
+    // Highlight clicked nav item
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    
+    // Scroll to section with header offset
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const headerOffset = 80;  // 70px header + 10px padding
+        const targetPosition = section.offsetTop - headerOffset;
+        
+        window.scrollTo({
+            top: Math.max(0, targetPosition),
+            behavior: 'smooth'
+        });
     }
 }
-       
-        // ===================== INITIALIZATION =====================
+    
+    function initScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    // Map nav items to their section IDs for faster lookup
+    const navMap = {};
+    navItems.forEach(item => {
+        const match = item.getAttribute('onclick').match(/scrollToSection\('([^']+)'\)/);
+        if (match) navMap[match[1]] = item;
+    });
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const scrollPos = window.scrollY + 100; // Offset for header
+        
+        // Find which section is currently in view
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            // Check if scroll position is within this section
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                current = section.getAttribute('id');
+            }
+        }
+        
+        // If scrolled to very bottom, highlight last section
+        const nearBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100;
+        if (nearBottom && !current && sections.length > 0) {
+            current = sections[sections.length - 1].getAttribute('id');
+        }
+        
+        // Update nav highlighting
+        navItems.forEach(item => item.classList.remove('active'));
+        if (current && navMap[current]) {
+            navMap[current].classList.add('active');
+        }
+    });
+}
+    
+    function disableDoubleClickZoom() {
+    // Disable double-click zoom
+    document.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+    }, { passive: false });
 
+    // Disable double-tap zoom on touch devices
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(e) {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {  // Within 300ms = double tap
+            e.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, { passive: false });
+}
+
+    
+    function setBackground(imageUrl) {
+    const bgLayer = document.getElementById('bgLayer');
+    if (imageUrl && imageUrl.trim() !== '') {
+        bgLayer.style.backgroundImage = `url(${imageUrl})`;
+    } else {
+        bgLayer.style.backgroundImage = '';
+    }
+}
+        // ===================== INIT =====================
         document.addEventListener('DOMContentLoaded', function() {
             initMatchingState();
             renderMatching();
             initMatchingEvents();
             renderMCQ();
-            setBackground('https://i.imgur.com/ytubBUf.jpg'); 
+            initScrollSpy();  
+            disableDoubleClickZoom()
+            setBackground('https://i.imgur.com/bxeX7V6.jpg');  
         });
     
     
     </script>
 </body>
 </html>
+
 
 
